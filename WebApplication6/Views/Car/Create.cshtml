@@ -1,0 +1,103 @@
+﻿@model Car
+
+    <style>
+
+        input[type=text], select {
+            width: 50%;
+            padding: 0px 0px;
+            margin: 0 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        div {
+            border-radius: 5px;
+            padding: 15px;
+        }
+        form {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            border: 2px solid black;
+            box-shadow: 5px 3px 5px black;
+        }
+
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+    </style>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <body>
+        <h1 style="text-align:center"> Add new car</h1>
+
+        <form enctype="multipart/form-data" method="post" class="mt-3" ; style="text-align:center">
+
+            <div class="text-left">
+                <b>Brand</b>
+                @Html.DropDownListFor(m => m.Brand, (IEnumerable<SelectListItem>)ViewBag.BrandID, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Brand, null, new { @class = "text-danger" })
+            </div>
+            <div class="text-left">
+                <b>Model</b><br />
+                <input asp-for="Model" class="form-control" />
+                @Html.ValidationMessageFor(m => m.Model, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="text-left">
+                <b><label asp-for="Price"></label></b>
+                <input asp-for="Price" class="form-control" />
+                @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })
+            </div>
+
+
+
+            @if (@User.IsInRole("Admin"))
+            {
+                <div class="text-left">
+                    <b><label asp-for="Company"></label></b>
+                    <br />
+                    <input asp-for="Company" class="form-control" />
+                </div>
+            }
+
+            <div class="text-left">
+                <b><label asp-for="Photo"></label></b>
+                <input asp-for="Photo" class="text-right form-control" />
+
+            </div>
+
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <br /><br />
+    </body>
+    </html>
